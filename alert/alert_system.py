@@ -1,47 +1,46 @@
 import json
+'''
+Created on 02/10/2019
+@author: Xiangkun Ye
+Source code copied from https://github.com/alexlin0625/EC500_Spring19/blob/alert-system/alert_system.py.
+With lots of modifications to make it work.
+Basically I rewrited the whole file.
+The original one by mohitbeniwal is bullshit.
+'''
 
-j = {"patient_id": 1, "bp_id": 55, "pulse_id": 30, "pulse_range": {"lower": 40, "upper": 120},
-     "temp_id": 102, "temp_range": {"lower": 92, "upper": 101}, "bp_range": {"lower": 50, "upper": 60}}
-j_o = json.dumps(j)
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Feb  6 09:29:32 2019
 
-# d_o=json.loads(j_o)
-
-
-def saveAlertData(alert_message, p_id):
-
-    alert_dict = {"alert_message": alert_message, "patient_id": p_id}
-    alert_json = json.dumps(alert_dict)
-    # print(alert_json)
-    # call_storage_module(alert_json)
+@author: mohitbeniwal
+"""
 
 
 def sendToUI(msg, j):
     ui_dict = {"alert_message": msg,
-               "bp_id": j["bp_id"], "pulse_id": j["pulse_id"], "temp_id": j["temp_id"]}
+               "bloodPressure": j["bloodPressure"], "pulse": j["pulse"], "bloodOx": j["bloodOx"]}
     ui_json = json.dumps(ui_dict)
-    # print(ui_json)
     return ui_json
+    print(ui_json)
     # call_output_method
 
 
 def alertCheck(j_o):
     j = json.loads(j_o)
     alert_message = ""
-    if(j["bp_id"] < j["bp_range"]["lower"]):
-        alert_message += "BP is Too low, "
-    elif(j["bp_id"] > j["bp_range"]["upper"]):
-        alert_message = "BP is Too high, "
-    if(j["pulse_id"] < j["pulse_range"]["lower"]):
-        alert_message += "pulse is Too low, "
-    elif(j["pulse_id"] > j["pulse_range"]["upper"]):
-        alert_message += "pulse is Too high, "
-    if(j["temp_id"] < j["temp_range"]["lower"]):
-        alert_message += "temp is Too low, "
-    elif(j["temp_id"] > j["temp_range"]["upper"]):
-        alert_message += "temp is Too high, "
-    if(alert_message != ""):
-        saveAlertData(alert_message, j["patient_id"])
-    return sendToUI(alert_message, j)
-
-
-# alertCheck(j_o)
+    for value in j.values():
+        val = value
+    if(val["bloodPressure"] < val["pressureRange"]["lower"]):
+        alert_message += "BloodPressure is Too low, "
+    elif(val["bloodPressure"] > val["pressureRange"]["upper"]):
+        alert_message = "BloodPressure is Too high, "
+    if(val["pulse"] < val["pulseRange"]["lower"]):
+        alert_message += "Pulse is Too low, "
+    elif(val["pulse"] > val["pulseRange"]["upper"]):
+        alert_message += "Pulse is Too high, "
+    if(val["bloodOx"] < val["oxRange"]["lower"]):
+        alert_message += "BloodOx is Too low, "
+    elif(val["bloodOx"] > val["oxRange"]["upper"]):
+        alert_message += "BloodOx is Too high, "
+    return sendToUI(alert_message, val)

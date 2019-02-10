@@ -24,11 +24,12 @@ class patient(object):
     def get_temp_id(self, temp_id):
         return temp_id
 
-    def recieveFromAlert(self, data):
+    def recieveFromAlert(self, rawJson):
+        data = json.loads(rawJson)
         self.msg = data["alert_message"]
-        self.bp_id = data["bp_id"]
-        self.pulse_id = data["pulse_id"]
-        self.temp_id = data["temp_id"]
+        self.bp_id = data["bloodPressure"]
+        self.pulse_id = data["pulse"]
+        self.temp_id = data["bloodOx"]
 
     def recieveFromUsers(self, data):
         self.user_req = data["req"]
@@ -36,20 +37,20 @@ class patient(object):
 
     def select(self, req):
         data = ''
-        if req == "bp_id":
+        if req == "bloodPressure":
             data = self.bp_id
-        elif req == 'pulse_id':
+        elif req == 'pulse':
             data = self.pulse_id
-        elif req == 'temp_id':
+        elif req == 'bloodOx':
             data = self.temp_id
         self.send_select_to_UI(req, data)
 
     def send_alert_to_UI(self):
         send_data = json.dumps({
             'alert_message': self.msg,
-            'bp_id': self.bp_id,
-            'pulse_id': self.pulse_id,
-            'temp_id': self.temp_id
+            'bloodPressure': self.bp_id,
+            'pulse': self.pulse_id,
+            'bloodOx': self.temp_id
         })
         print(send_data)
         return send_data
@@ -66,8 +67,7 @@ def main():
     patient_1 = patient()
     json_dir = os.getcwd()
     with open(json_dir + '/patient.json', 'r') as rawJson:
-        data = json.load(rawJson)
-        patient_1.recieveFromAlert(data)
+        patient_1.recieveFromAlert(rawJson)
         patient_1.send_alert_to_UI()
         rawJson.close()
 
