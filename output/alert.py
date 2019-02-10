@@ -20,6 +20,7 @@ def sendToUI(msg, j):
                "bp_id": j["bp_id"], "pulse_id": j["pulse_id"], "temp_id": j["temp_id"]}
     ui_json = json.dumps(ui_dict)
     print(ui_json)
+    return ui_json
     # call_output_method
 
 
@@ -40,7 +41,7 @@ def alertCheck(j_o):
         alert_message += "temp is Too high, "
     if(alert_message != ""):
         saveAlertData(alert_message, j["patient_id"])
-    sendToUI(alert_message, j)
+    return sendToUI(alert_message, j)
 
 
 alertCheck(j_o)
