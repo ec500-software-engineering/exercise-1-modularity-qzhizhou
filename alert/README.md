@@ -1,5 +1,5 @@
 Alert system will receive a JSON file containing patient info from Input Analyzer.
-
+(from https://github.com/alexlin0625/EC500_Spring19/tree/alert-system)
  
 
 Function stubs:

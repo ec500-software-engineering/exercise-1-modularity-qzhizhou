@@ -1,6 +1,6 @@
 # EC500_Spring19
 
-Input Module
+Input Module(from https://github.com/alexlin0625/EC500_Spring19/tree/input_module)
 ================
 **The input module consists of the following functions:**
 

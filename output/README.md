@@ -1,5 +1,5 @@
 # EC500_Spring19  
-# Output Module  
+# Output Module(Zhizhou Qiu)  
 ## Input Source  
 #### 1.Alert Module  
 - Jason Files
