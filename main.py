@@ -11,8 +11,8 @@ def main():
     '''
     input_sensor_json = input.readSensorData()
     input_patient_json = input.getPatientInfo()
-    input_data = json.loads(input_sensor_json)
-
+    input_sendor_data = json.loads(input_sensor_json)
+    input_patient_data = json.loads(input_patient_json)
     '''
     store in db
     '''
@@ -21,22 +21,19 @@ def main():
     '''
     analysis
     '''
-    alert_json = alert_system.alertCheck(input_sensor_json)
-
+    alert_json, patient_info = alert_system.alertCheck(
+        input_patient_json, input_sensor_json)
     '''
     output to UI
     '''
     patient1 = output.patient()
     patient1.recieveFromAlert(alert_json)
+    patient1.send_alert_to_UI(patient_info)
 
-    print("raw input: ", input_data)
-    print("final output: " + patient1.send_alert_to_UI())
-    print('\n')
-
-    '''search a person with PatientID 1234: '''
-    print('patient info: ', storage.searchPerson("1234"))
     '''update this table to set pulse = 100: '''
     storage.update("1234", '17:05:20pm-01/02/2019', 'bloodOx', '90')
+    '''search a person with PatientID 1234: '''
+    patient_info = storage.searchPerson("1234")
 
 
 if __name__ == "__main__":

@@ -45,15 +45,31 @@ class patient(object):
             data = self.temp_id
         self.send_select_to_UI(req, data)
 
-    def send_alert_to_UI(self):
-        send_data = json.dumps({
-            'alert_message': self.msg,
-            'bloodPressure': self.bp_id,
-            'pulse': self.pulse_id,
-            'bloodOx': self.temp_id
-        })
-        print(send_data)
-        return send_data
+    def send_alert_to_UI(self, patient_info):
+        patient_data = json.loads(patient_info)
+        for id in patient_data:
+            info = patient_data[id]
+            print('===============================')
+            print('Welcome to Health Monitoring System')
+            print('===============================')
+            print('PatientID: ', id)
+            print('Name: ', info['name'])
+            print('Gender: ', info['gender'])
+            print('Age: ', info['age'])
+            print('===============================')
+            print('alert_message: ', self.msg)
+            print('pulse: ', self.pulse_id)
+            print('bloodPressure: ', self.bp_id)
+            print('bloodOx: ', self.temp_id)
+            print('===============================')
+        # send_data = json.dumps({
+        #     'alert_message': self.msg,
+        #     'bloodPressure': self.bp_id,
+        #     'pulse': self.pulse_id,
+        #     'bloodOx': self.temp_id
+        # })
+        # # print(send_data)
+        # return send_data
 
     def send_select_to_UI(self, req, data):
         send_data = json.dumps({
