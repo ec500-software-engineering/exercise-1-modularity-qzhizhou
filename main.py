@@ -16,7 +16,7 @@ def main():
     '''
     store in db
     '''
-    storage.insert(input_patient_json, input_sensor_json)
+    # storage.insert(input_patient_json, input_sensor_json)
 
     '''
     analysis
@@ -31,9 +31,9 @@ def main():
     patient1.send_alert_to_UI(patient_info)
 
     '''update this table to set pulse = 100: '''
-    storage.update("1234", '17:05:20pm-01/02/2019', 'bloodOx', '90')
+    # storage.update("1234", '17:05:20pm-01/02/2019', 'bloodOx', '90')
     '''search a person with PatientID 1234: '''
-    patient_info = storage.searchPerson("1234")
+    # patient_info = storage.searchPerson("1234")
 
 
 if __name__ == "__main__":
