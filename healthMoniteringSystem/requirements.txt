@@ -1,0 +1,4 @@
+pymongo
+flake8
+mypy
+pytest
